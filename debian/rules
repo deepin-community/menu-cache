@@ -1,0 +1,30 @@
+#!/usr/bin/make -f
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+
+%:
+	dh ${@}
+
+override_dh_auto_configure:
+	dh_auto_configure -- --enable-gtk-doc --libexecdir=/usr/lib
+
+override_dh_auto_install:
+	dh_auto_install
+	rm -f debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)/*.la
+
+override_dh_install:
+	dh_install --fail-missing
+
+override_dh_installchangelogs:
+	dh_installchangelogs NEWS
+
+override_dh_strip:
+	dh_strip -plibmenu-cache3 --dbgsym-migration='libmenu-cache-dbg (<< 1.1.0-1)'
+	dh_strip -plibmenu-cache-bin --dbgsym-migration='libmenu-cache-bin-dbg (<< 1.1.0-1)'
+
+override_dh_autoreconf_clean:
+	dh_autoreconf_clean
+	rm -f docs/reference/libmenu-cache/libmenu-cache-docs.sgml
+	rm -f docs/reference/libmenu-cache/libmenu-cache-sections.txt
