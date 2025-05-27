@@ -1,3 +1,23 @@
+menu-cache (1.1.1-1) unstable; urgency=medium
+
+  * debian/watch: update.
+  * New upstream version 1.1.1.
+  * debian/control: update team address.
+  * debian/control: update Vcs-Git tags.
+  * Run wrap-and-sort.
+  * debian/control: bump to Standards-version to 4.7.0, no changes needed.
+  * debian/gbp.conf: added.
+  * debian/salsa-ci.yml: added.
+  * debian/control: use debhelper compat 13.
+  * debian/patches: drop patch already included upstream.
+  * debian/rules: drop unnecessary dh argument that included in debhelper
+    13.
+  * debian/copyright: update.
+  * debian/source/: drop obsoleted files.
+  * debian/libmenu-cache-bin.lintian-overrides: drop.
+
+ -- Andrew Lee (李健秋) <ajqlee@debian.org>  Sat, 15 Feb 2025 12:01:55 +0100
+
 menu-cache (1.1.0-1.1) unstable; urgency=medium
 
   * Non-maintainer upload.
